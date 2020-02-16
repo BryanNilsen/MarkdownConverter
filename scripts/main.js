@@ -1,15 +1,35 @@
+
 console.log("Marky Markdown, Ready To Get Funky!")
 
-const rawUrl = `https://gist.githubusercontent.com/askingalot/c0965782b49cf17acc2001dac3bd6d24/raw/b3b769606bf9329e8a5d0fe2165a7fb95cc2bdd8/markdown-to-html.md`
 
 
-// TODO gather form data
-// reference to text iput element
+// AUTOMATED TEST AGAINST SPECIFIED RAW TEXT FILE
+// fetch('https://gist.githubusercontent.com/askingalot/c0965782b49cf17acc2001dac3bd6d24/raw/b3b769606bf9329e8a5d0fe2165a7fb95cc2bdd8/markdown-to-html.md')
+//   .then(response => response.text())
+//   .then((data) => {
+//     console.log(data)
+//     const convertedHTML = textConverter(data)
+//     renderOutput(convertedHTML)
+//   })
+
+// AUTOMATED TEST AGAINST MY TEXT FILE
+fetch('https://raw.githubusercontent.com/BryanNilsen/MarkdownConverter/master/scripts/raw.txt')
+  .then(response => response.text())
+  .then((data) => {
+    console.log(data)
+    const convertedHTML = textConverter(data)
+    renderOutput(convertedHTML)
+  })
+
+
+
+// ! gather form data
+// reference to text input element
 const textInput = document.getElementById("text_input")
 // reference to button
 const convertButton = document.getElementById("convert_btn")
 // event listener
-convertButton.addEventListener("click", () => {
+textInput.addEventListener("keyup", () => {
   // get value of text input
   const ToConvert = textInput.value
   // run text through converter function
@@ -20,12 +40,7 @@ convertButton.addEventListener("click", () => {
 
 })
 
-// ! convert to map function over array -> figure out order of operations
-// ! check beginning of each string first and then replace for header
-
-
-// TODO convert input to markdown format
-// convert input to HTML representation
+// ! convert input to HTML representation
 
 function textConverter(inputText) {
   // split the input text into an array
