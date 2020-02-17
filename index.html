@@ -10,25 +10,27 @@
 
 <body>
   <div class="main_container">
-    <h1>Markdown Converter</h1>
-    <h2>Enter text to convert:</h2>
-    <section>
-      <!-- begin input form -->
-      <textarea id="text_input" cols="30" rows="10"></textarea>
+    <div id="input_panel" class="panel">
+      <h1>Markdown Converter</h1>
+      <h2>Enter text to convert:</h2>
+      <section>
+        <!-- begin input form -->
+        <textarea id="text_input" cols="30" rows="10"></textarea>
+        <!-- end input form -->
+      </section>
       <button id="convert_btn">Convert!</button>
-      <!-- end input form -->
-    </section>
-
-    <h1>Output:</h1>
-    <p id="markdown_output" class="markdown">
-      <!-- converted text here -->
-    </p>
-
+    </div>
+    <div id="output_panel" class="panel">
+      <h1>Output:</h1>
+      <p id="markdown_output" class="markdown">
+        <!-- converted text here -->
+      </p>
+    </div>
 
   </div>
 
 
-  <script src="./scripts/main.js"></script>
+  <script type="module" src="./scripts/main.js"></script>
 </body>
 
 </html>

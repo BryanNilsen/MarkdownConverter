@@ -4,6 +4,15 @@ body {
   font-size: 16px;
 }
 
+.main_container {
+  display: flex;
+}
+
+.panel {
+  flex-basis: 50%;
+  max-width: 50%;
+}
+
 .markdown {
   font-size: .8rem;
   background-color: white;
