@@ -9,26 +9,34 @@
 </head>
 
 <body>
-  <div class="main_container">
-    <div id="input_panel" class="panel">
-      <h1>Markdown Converter</h1>
-      <h2>Enter text to convert:</h2>
-      <section>
-        <!-- begin input form -->
-        <textarea id="text_input" cols="30" rows="10"></textarea>
-        <!-- end input form -->
-      </section>
-      <button id="convert_btn">Convert!</button>
+  <nav>
+    <div class="title">MARK|DOWN</div>
+    <div>markdown converter</div>
+    <div>about</div>
+  </nav>
+
+  <!-- GRID CONTAINER -->
+  <div class="main_grid">
+    <div id="markdown_header">
+      <h3>Markdown</h3>
     </div>
-    <div id="output_panel" class="panel">
-      <h1>Output:</h1>
-      <p id="markdown_output" class="markdown">
-        <!-- converted text here -->
-      </p>
+    <div id="preview_header">
+      <h3>Preview</h3>
     </div>
+    <div id="markdown_container" class="input_section">
+      <!-- begin input form -->
+      <textarea id="text_input" rows="10"></textarea>
+      <!-- end input form -->
+    </div>
+    <div id="preview_container">
+      <div id="markdown_output" class="markdown"></div>
+    </div>
+    <div id="markdown_footer">
+      <button id="download_btn">download</button>
+    </div>
+    <div id="preview_footer">preview footer</div>
 
   </div>
-
 
   <script type="module" src="./scripts/main.js"></script>
 </body>
