@@ -1,22 +1,22 @@
-#Markdown
+# Markdown
 
 This is how the markdown will look
 
-##Headings:
+## Headings:
 
-#this is an H1
+# this is an H1
 
-##this is an H2
+## this is an H2
 
-###this is an h3
+### this is an h3
 
-####this is an h4
+#### this is an h4
 
-#####this is an h5
+##### this is an h5
 
 ###### this is an h6
 
-##Text Styles:
+## Text Styles:
 
 Here is some **bold** text
 
@@ -26,10 +26,12 @@ Here is some _italic_ text
 
 This is an unordered list:
 
-*item one
-*item two
-*item three
+* item one
+* item two
+* item three
 
 This is an ordered list:
 
-1. item one 1. item two 1. item three
+1. item one
+1. item two
+1. item three

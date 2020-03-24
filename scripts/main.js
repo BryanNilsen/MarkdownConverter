@@ -12,22 +12,15 @@ console.log("Marky Markdown, Ready To Get Funky!")
 //     renderOutput(convertedHTML)
 //   })
 
-// AUTOMATED TEST AGAINST MY TEXT FILE
-fetch('https://raw.githubusercontent.com/BryanNilsen/MarkdownConverter/master/scripts/raw.txt')
-  .then(response => response.text())
-  .then((data) => {
-    console.log(data)
-    const convertedHTML = textConverter(data)
-    renderOutput(convertedHTML)
-  })
-
 
 
 // ! gather form data
 // reference to text input element
 const textInput = document.getElementById("text_input")
+
 // reference to button
 const convertButton = document.getElementById("convert_btn")
+
 // event listener
 textInput.addEventListener("keyup", () => {
   // get value of text input
@@ -35,10 +28,20 @@ textInput.addEventListener("keyup", () => {
   // run text through converter function
   const convertedHTML = textConverter(ToConvert)
   // append converted text to DOM
-
   renderOutput(convertedHTML)
 
 })
+
+
+// AUTOMATED TEST AGAINST MY TEXT FILE
+fetch('https://raw.githubusercontent.com/BryanNilsen/MarkdownConverter/master/scripts/raw.txt')
+  .then(response => response.text())
+  .then((data) => {
+    console.log(data)
+    textInput.value = data;
+    const convertedHTML = textConverter(data)
+    renderOutput(convertedHTML)
+  })
 
 // ! convert input to HTML representation
 
@@ -165,16 +168,31 @@ function textConverter(inputText) {
     } else {
       convertedTextAsHTML += `<p>${string}</p>`
     }
-
   })
   return convertedTextAsHTML
 }
 
 
-// TODO render to DOM
-// take converted HTML and render to output element
+// RENDER converted HTML to output element
 function renderOutput(htmlRep) {
   // reference to DOM element for output
   const markdownOutput = document.getElementById("markdown_output")
   markdownOutput.innerHTML = htmlRep;
 }
+
+
+function download(filename, text) {
+  const element = document.createElement('a');
+  element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+  element.setAttribute('download', filename);
+
+  element.style.display = 'none';
+  document.body.appendChild(element);
+
+  element.click();
+
+  document.body.removeChild(element);
+}
+
+const downloadButton = document.getElementById("download_btn")
+downloadButton.addEventListener("click", () => download("MarkdownSample.md", textInput.value))
