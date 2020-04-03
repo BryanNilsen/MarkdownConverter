@@ -35,3 +35,11 @@ This is an ordered list:
 1. item one
 1. item two
 1. item three
+
+## Links
+
+Get some JavaScript help at [MDN](https://developer.mozilla.org/en-US/)
+
+## Images
+
+![image of glasses](https://avatars1.githubusercontent.com/u/3890273?s=460&v=4)

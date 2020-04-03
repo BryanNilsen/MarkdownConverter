@@ -1,8 +1,3 @@
-
-console.log("Marky Markdown, Ready To Get Funky!")
-
-
-
 // AUTOMATED TEST AGAINST SPECIFIED RAW TEXT FILE
 // fetch('https://gist.githubusercontent.com/askingalot/c0965782b49cf17acc2001dac3bd6d24/raw/b3b769606bf9329e8a5d0fe2165a7fb95cc2bdd8/markdown-to-html.md')
 //   .then(response => response.text())
@@ -13,6 +8,9 @@ console.log("Marky Markdown, Ready To Get Funky!")
 //   })
 
 
+// TODO: A blank line in a file denotes a paragraph boundary. The text between blank lines should be wrapped in P tags.
+// TODO: check centering on either link or image - needs a block element
+// TODO: trim space before list items / headers
 
 // ! gather form data
 // reference to text input element
@@ -46,8 +44,9 @@ fetch('https://raw.githubusercontent.com/BryanNilsen/MarkdownConverter/master/sc
 // ! convert input to HTML representation
 
 function textConverter(inputText) {
+  console.log("input text", inputText)
   // split the input text into an array
-  const textArray = inputText.split(/\n\n/)
+  const textArray = inputText.split(/\n/)
   console.log('convertedTextArray: ', textArray);
 
   // HTML element to build up
@@ -194,5 +193,8 @@ function download(filename, text) {
   document.body.removeChild(element);
 }
 
-const downloadButton = document.getElementById("download_btn")
-downloadButton.addEventListener("click", () => download("MarkdownSample.md", textInput.value))
+const downloadMarkdownButton = document.getElementById("download_markdown_btn")
+downloadMarkdownButton.addEventListener("click", () => download("Markdown.md", textInput.value))
+
+const downloadHTMLButton = document.getElementById("download_html_btn")
+downloadHTMLButton.addEventListener("click", () => download("HTML.txt", textConverter(textInput.value)))
