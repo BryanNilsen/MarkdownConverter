@@ -1,53 +1,38 @@
-// AUTOMATED TEST AGAINST SPECIFIED RAW TEXT FILE
-// fetch('https://gist.githubusercontent.com/askingalot/c0965782b49cf17acc2001dac3bd6d24/raw/b3b769606bf9329e8a5d0fe2165a7fb95cc2bdd8/markdown-to-html.md')
-//   .then(response => response.text())
-//   .then((data) => {
-//     console.log(data)
-//     const convertedHTML = textConverter(data)
-//     renderOutput(convertedHTML)
-//   })
+/**
+ * This file contains all code related to gathering
+ * user input from the DOM, converting it to an HTML
+ * representation, and appending it to the DOM.
+ * @author Bryan Nilsen
+**/
 
 
-// TODO: A blank line in a file denotes a paragraph boundary. The text between blank lines should be wrapped in P tags.
-// TODO: check centering on either link or image - needs a block element
-// TODO: trim space before list items / headers
-
-// ! gather form data
-// reference to text input element
+// gather form data
 const textInput = document.getElementById("text_input")
 
-// reference to button
+// reference to buttons
 const convertButton = document.getElementById("convert_btn")
+const clearButton = document.getElementById("clear_btn")
+const downloadMarkdownButton = document.getElementById("download_markdown_btn")
+const downloadHTMLButton = document.getElementById("download_html_btn")
 
-// event listener
-textInput.addEventListener("keyup", () => {
-  // get value of text input
-  const ToConvert = textInput.value
-  // run text through converter function
-  const convertedHTML = textConverter(ToConvert)
-  // append converted text to DOM
-  renderOutput(convertedHTML)
 
-})
 
 
 // AUTOMATED TEST AGAINST MY TEXT FILE
 fetch('https://raw.githubusercontent.com/BryanNilsen/MarkdownConverter/master/scripts/raw.txt')
   .then(response => response.text())
   .then((data) => {
-    console.log(data)
     textInput.value = data;
     const convertedHTML = textConverter(data)
     renderOutput(convertedHTML)
   })
 
-// ! convert input to HTML representation
+// convert input to HTML representation
+// TODO: refactor into individual functions that take in the string
 
 function textConverter(inputText) {
-  console.log("input text", inputText)
   // split the input text into an array
-  const textArray = inputText.split(/\n/)
-  console.log('convertedTextArray: ', textArray);
+  const textArray = inputText.split(/\n\n/)
 
   // HTML element to build up
   let convertedTextAsHTML = "";
@@ -110,10 +95,14 @@ function textConverter(inputText) {
     // CONVERT IMAGES and ALT TEXT
     if (string.match(/\!\[/)) {
       const regExpAltText = /\!\[(.*?)\]/
-      var altText = regExpAltText.exec(string)[1];
+      const altText = regExpAltText.exec(string)[1];
+      const preImageText = string.split(regExpAltText)[0]
+
       const regExpPath = /\(([^)]+)\)/;
-      var path = regExpPath.exec(string)[1];
-      convertedTextAsHTML += `<img alt="${altText}" src="${path}"/>`
+      const path = regExpPath.exec(string)[1];
+      const postImageText = string.split(regExpPath)[2]
+
+      convertedTextAsHTML += `${preImageText}<img alt="${altText}" src="${path}"/>${postImageText}`
       return
     }
 
@@ -144,7 +133,7 @@ function textConverter(inputText) {
       }
     } else if (string.startsWith("*")) {
       // UNORDERED LIST ITEMS
-      const newStringArray = string.split("*")
+      const newStringArray = string.split(/\*/)
       let unOrderedList = "<ul>"
       newStringArray.forEach(item => {
         if (item != "") {
@@ -189,12 +178,24 @@ function download(filename, text) {
   document.body.appendChild(element);
 
   element.click();
-
   document.body.removeChild(element);
 }
 
-const downloadMarkdownButton = document.getElementById("download_markdown_btn")
-downloadMarkdownButton.addEventListener("click", () => download("Markdown.md", textInput.value))
 
-const downloadHTMLButton = document.getElementById("download_html_btn")
+
+// EVENT LISTENERS
+
+textInput.addEventListener("keyup", () => {
+  const ToConvert = textInput.value
+  const convertedHTML = textConverter(ToConvert)
+  renderOutput(convertedHTML)
+})
+
+clearButton.addEventListener("click", () => {
+  textInput.value = ""
+  renderOutput("")
+})
+
 downloadHTMLButton.addEventListener("click", () => download("HTML.txt", textConverter(textInput.value)))
+
+downloadMarkdownButton.addEventListener("click", () => download("Markdown.md", textInput.value))
