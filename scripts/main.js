@@ -11,7 +11,8 @@ const textInput = document.getElementById("text_input")
 
 // reference to buttons
 const convertButton = document.getElementById("convert_btn")
-const clearButton = document.getElementById("clear_btn")
+const clearButtons = document.querySelectorAll(".clear_btn")
+console.log('clearButtons: ', clearButtons);
 const downloadMarkdownButton = document.getElementById("download_markdown_btn")
 const downloadHTMLButton = document.getElementById("download_html_btn")
 
@@ -191,10 +192,10 @@ textInput.addEventListener("keyup", () => {
   renderOutput(convertedHTML)
 })
 
-clearButton.addEventListener("click", () => {
+clearButtons.forEach(button => button.addEventListener("click", () => {
   textInput.value = ""
   renderOutput("")
-})
+}))
 
 downloadHTMLButton.addEventListener("click", () => download("HTML.txt", textConverter(textInput.value)))
 

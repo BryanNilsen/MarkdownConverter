@@ -74,8 +74,9 @@ nav .title {
   background-color: rgb(238, 244, 248);
   padding: 5px;
   border: 1px solid rgb(170, 170, 170);
-  border-bottom: 2px solid rgb(90, 90, 90);
+  border-bottom: 3px solid rgb(90, 90, 90);
   border-radius: 4px 4px 0 0;
+  height: 79%
 }
 
 
@@ -107,9 +108,12 @@ tt {
 }
 
 button {
-  margin: .5rem;
-  padding: .5rem;
-  border: 1px solid rgb(170, 170, 170);
+  margin: .3rem;
+  padding: .2rem .4rem;
+  border: 0px solid rgb(170, 170, 170);
+  background-color: #2b394f;
+  color: white;
+  border-radius: 3px;
 }
 
 .footer {
